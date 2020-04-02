@@ -1,6 +1,7 @@
 syntax = "proto3";
 option java_multiple_files = true;
-package org.camunda.bpm.grpc;
+
+package org.camunda.bpm.engine.grpc;
 
 service ExternalTask {
     rpc fetchAndLock (stream FetchAndLockRequest) returns (stream FetchAndLockResponse) {};
