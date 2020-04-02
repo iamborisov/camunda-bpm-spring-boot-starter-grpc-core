@@ -1,0 +1,108 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.camunda.bpm.grpc;
+
+service ExternalTask {
+    rpc fetchAndLock (stream FetchAndLockRequest) returns (stream FetchAndLockResponse) {};
+    rpc complete (CompleteRequest) returns (CompleteResponse);
+    rpc unlock (UnlockRequest) returns (UnlockResponse);
+    rpc handleFailure (HandleFailureRequest) returns (HandleFailureResponse);
+    rpc handleBpmnError (HandleBpmnErrorRequest) returns (HandleBpmnErrorResponse);
+    rpc extendLock (ExtendLockRequest) returns (ExtendLockResponse);
+    rpc createMessage (CreateMessageRequest) returns (CreateMessageResponse);
+}
+
+message FetchAndLockRequest {
+    message FetchExternalTaskTopic {
+        string topicName = 1;
+        string businessKey = 2;
+        string processDefinitionId = 3;
+        repeated string processDefinitionIdIn = 4;
+        string processDefinitionKey = 5;
+        repeated string processDefinitionKeyIn = 6;
+        string processDefinitionVersionTag = 7;
+        int64 lockDuration = 8;
+        bool deserializeValues = 9;
+        bool localVariables = 10;
+        bool withoutTenantId = 11;
+        repeated string tenantIdIn = 12;
+    }
+
+    string workerId = 1;
+    bool usePriority = 2;
+    repeated FetchExternalTaskTopic topic = 3;
+}
+
+message FetchAndLockResponse {
+    string id = 1;
+    string workerId = 2;
+    string topicName = 3;
+    int32 retries = 4;
+    string variables = 5;
+    string businessKey = 6;
+    string processInstanceId = 7;
+}
+
+message CompleteRequest {
+    string id = 1;
+    string workerId = 2;
+    string variables = 3;
+}
+
+message CompleteResponse {
+    string status = 1;
+}
+
+message UnlockRequest {
+    string id = 1;
+}
+
+message UnlockResponse {
+    string status = 1;
+}
+
+message HandleFailureRequest {
+    string id = 1;
+    string workerId = 2;
+    string errorMessage = 3;
+    string errorDetails = 4;
+    int32 retries = 5;
+    int64 retryTimeout = 6;
+}
+
+message HandleFailureResponse {
+    string status = 1;
+}
+
+message HandleBpmnErrorRequest {
+    string id = 1;
+    string workerId = 2;
+    string errorCode = 3;
+    string errorMessage = 4;
+    string variables = 5;
+}
+
+message HandleBpmnErrorResponse {
+    string status = 1;
+}
+
+message ExtendLockRequest {
+    string id = 1;
+    string workerId = 2;
+    int64 duration = 3;
+}
+
+message ExtendLockResponse {
+    string status = 1;
+}
+
+message CreateMessageRequest {
+    string messageName = 1;
+    string processInstanceId = 2;
+    string variables = 3;
+    string businessKey = 4;
+}
+
+message CreateMessageResponse {
+    string processInstanceId = 1;
+}
