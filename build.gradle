@@ -56,3 +56,5 @@ protobuf {
         }
     }
 }
+
+jar.enabled = true
