@@ -32,6 +32,7 @@ message FetchAndLockRequest {
     string workerId = 1;
     bool usePriority = 2;
     repeated FetchExternalTaskTopic topic = 3;
+    int32 maxTasks = 4;
 }
 
 message FetchAndLockResponse {
