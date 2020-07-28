@@ -11,6 +11,7 @@ service ExternalTask {
     rpc handleBpmnError (HandleBpmnErrorRequest) returns (HandleBpmnErrorResponse);
     rpc extendLock (ExtendLockRequest) returns (ExtendLockResponse);
     rpc createMessage (CreateMessageRequest) returns (CreateMessageResponse);
+    rpc deleteProcessInstance (DeleteProcessInstanceRequest) returns (DeleteProcessInstanceResponse);
 }
 
 message FetchAndLockRequest {
@@ -107,4 +108,12 @@ message CreateMessageRequest {
 
 message CreateMessageResponse {
     string processInstanceId = 1;
+}
+
+message DeleteProcessInstanceRequest {
+    string processInstanceId = 1;
+}
+
+message DeleteProcessInstanceResponse {
+    string status = 1;
 }
