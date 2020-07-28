@@ -112,6 +112,7 @@ message CreateMessageResponse {
 
 message DeleteProcessInstanceRequest {
     string processInstanceId = 1;
+    string reason = 2;
 }
 
 message DeleteProcessInstanceResponse {
