@@ -3,6 +3,7 @@ plugins {
     id "java-library"
     id "idea"
     id "com.google.protobuf" version "0.8.12"
+    id "maven-publish"
 }
 
 apply from: "version.gradle"
@@ -11,6 +12,18 @@ group = "org.camunda.bpm.engine.grpc"
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
 
 ext {
     grpcVersion = "1.28.0"

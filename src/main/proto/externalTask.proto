@@ -50,6 +50,7 @@ message CompleteRequest {
     string id = 1;
     string workerId = 2;
     string variables = 3;
+    string processInstanceId = 4;
 }
 
 message CompleteResponse {
@@ -71,6 +72,7 @@ message HandleFailureRequest {
     string errorDetails = 4;
     int32 retries = 5;
     int64 retryTimeout = 6;
+    string processInstanceId = 7;
 }
 
 message HandleFailureResponse {
@@ -83,6 +85,7 @@ message HandleBpmnErrorRequest {
     string errorCode = 3;
     string errorMessage = 4;
     string variables = 5;
+    string processInstanceId = 6;
 }
 
 message HandleBpmnErrorResponse {
