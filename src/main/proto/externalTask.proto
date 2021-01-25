@@ -12,6 +12,7 @@ service ExternalTask {
     rpc extendLock (ExtendLockRequest) returns (ExtendLockResponse);
     rpc createMessage (CreateMessageRequest) returns (CreateMessageResponse);
     rpc deleteProcessInstance (DeleteProcessInstanceRequest) returns (DeleteProcessInstanceResponse);
+    rpc createProcessInstance (CreateProcessInstanceRequest) returns (CreateProcessInstanceResponse);
 }
 
 message FetchAndLockRequest {
@@ -120,4 +121,16 @@ message DeleteProcessInstanceRequest {
 
 message DeleteProcessInstanceResponse {
     string status = 1;
+}
+
+message CreateProcessInstanceRequest {
+    string processName = 1;
+    string variables = 2;
+    string businessKey = 3;
+}
+
+message CreateProcessInstanceResponse {
+    string status = 1;
+    string message = 2;
+    string processInstanceId = 3;
 }
